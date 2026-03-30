@@ -69,16 +69,7 @@ const NewsModal = ({ isOpen, closeModal, newsData }) => {
                 </div>
 
                 <div className="mt-10 border-t border-gray-50 text-right">
-                  <FilledButton
-                    classFont={'font-bold'}
-                    classSpace={'px-8 py-3'}
-                    classColor={
-                      'bg-emerald-500 text-white hover:bg-emerald-600'
-                    }
-                    classShadow={'shadow-lg shadow-emerald-100'}
-                    text={'回到列表'}
-                    clickFunc={closeModal}
-                  />
+                  <FilledButton text={'回到列表'} clickFunc={closeModal} />
                 </div>
               </Dialog.Panel>
             </Transition.Child>
@@ -90,3 +81,11 @@ const NewsModal = ({ isOpen, closeModal, newsData }) => {
 };
 
 export default NewsModal;
+
+/*
+<NewsModal
+  isOpen={showModal}
+  closeModal={() => setShowModal(false)}
+  newsData={newsData[modalIndex]}
+/>;
+*/

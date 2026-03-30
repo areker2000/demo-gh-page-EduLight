@@ -1,6 +1,6 @@
 const BorderButtonGreen = ({
-  classFont,
-  classSpace,
+  classFont = 'text-xs',
+  classSpace = 'py-1 px-2 ml-4',
   classOthers,
   disabled = false,
   clickFunc,
@@ -28,11 +28,11 @@ export default BorderButtonGreen;
 
 /*
 <BorderButtonGreen
-  classFont={''}
-  classSpace={''}
+  // classFont={'text-xs'}
+  // classSpace={'py-1 px-2 ml-4'}
   classOthers={''}
-  disabled={}
+  // disabled={false}
   text={''}
-  clickFunc={}
+  clickFunc={''}
 />
 */

@@ -1,8 +1,9 @@
-import FilledButton from '../buttons/FilledButton';
-
 const TeacherCard = ({ teacher, showModalFunc }) => {
   return (
-    <div className="flex flex-col h-full bg-white rounded-2xl overflow-hidden soft-shadow hover:shadow-lg hover:shadow-emerald-100 hover:-translate-y-2 transition duration-300 border-emerald-300 border-1">
+    <div
+      className="flex flex-col h-full bg-white rounded-2xl overflow-hidden soft-shadow hover:shadow-lg hover:shadow-emerald-100 hover:-translate-y-2 transition duration-300 border-emerald-300 border-1 hover:cursor-pointer"
+      onClick={() => showModalFunc(teacher.id)}
+    >
       <div className="h-40 bg-gray-200 relative">
         <div className="h-40 bg-gray-200 relative  overflow-hidden">
           <img
@@ -39,16 +40,10 @@ const TeacherCard = ({ teacher, showModalFunc }) => {
           <p className="text-gray-500 text-sm mt-2">{teacher.description}</p>
         </div>
 
-        <div className="text-right mt-auto">
-          <FilledButton
-            classFont={'font-bold'}
-            classSpace={'mt-6 px-4 py-2'}
-            classColor={
-              'bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white'
-            }
-            text={'查看更多'}
-            clickFunc={() => showModalFunc(teacher.id)}
-          />
+        <div className="text-center mt-auto">
+          <div className="rounded-xl bg-emerald-50 text-emerald-600 font-bold mt-6 px-4 py-2">
+            點擊卡片 查看更多
+          </div>
         </div>
       </div>
     </div>
@@ -56,3 +51,10 @@ const TeacherCard = ({ teacher, showModalFunc }) => {
 };
 
 export default TeacherCard;
+
+/*
+<TeacherCard
+  teacher={''}
+  showModalFunc={''}
+/>
+*/

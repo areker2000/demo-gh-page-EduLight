@@ -23,15 +23,16 @@ const Teachers = () => {
         product_id: id,
         qty: qty,
       };
-      setFullLoadingText('正在加入購物車中，請稍候');
+      setFullLoadingText('正在加入購物車，請稍候');
       setIsFullLoading(true);
 
       const res = await axios.post(`${API_BASE}/api/${API_PATH}/cart`, {
         data,
       });
-      alert('加入商品成功');
-      setIsFullLoading(false);
       setShowModal(false);
+      setTimeout(() => {
+        setIsFullLoading(false);
+      }, 300);
     } catch (error) {
       console.error('加入購物車失敗', error);
     }
@@ -105,7 +106,6 @@ const Teachers = () => {
               handleSearch();
             }
           }}
-          onBlur={() => handleSearch()}
           disabled={isLoading}
         />
 

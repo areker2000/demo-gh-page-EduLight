@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 import checkIcon from '../assets/icon/tickMark.png';
+import FilledButton from '../components/buttons/FilledButton';
 
 const Login = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -151,13 +152,13 @@ const Login = () => {
                   </span>
                 </label>
               </div>
-
-              <button
-                type="submit"
-                className="w-full bg-emerald-500 text-white py-4 rounded-2xl font-bold text-lg hover:bg-emerald-600 shadow-lg shadow-emerald-200 transition-all transform active:scale-[0.98] mt-2"
-              >
-                登入
-              </button>
+              <FilledButton
+                type={'submit'}
+                classSpace={'w-full py-4 mt-2'}
+                classOthers={'text-lg'}
+                disabled={false}
+                text={'登入'}
+              />
               <p className="text-gray-400 text-sm text-center">
                 (輸入<span className="underline font-bold">使用者名稱</span>
                 與符合規則的<span className="underline font-bold">密碼</span>

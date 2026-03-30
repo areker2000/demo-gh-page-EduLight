@@ -9,7 +9,13 @@ const RemoveButton = ({
   return (
     <button
       type="button"
-      className={`text-red-400 ${!disabled && 'hover:text-red-600 hover:cursor-pointer'} ${classFont} ${classSpace} ${classOthers}`}
+      className={`
+        ${!disabled && 'hover:text-red-600 hover:cursor-pointer'} 
+        ${classFont} 
+        ${classSpace} 
+        ${classOthers}
+        text-red-400 
+      `}
       disabled={disabled}
       onClick={clickFunc}
     >
@@ -20,13 +26,13 @@ const RemoveButton = ({
 
 export default RemoveButton;
 
-{
-  /* <RemoveButton
-  classFont={'text-xs'}
-  classSpace={'mt-1'}
+/* 
+<RemoveButton
+  // classFont={'text-xs'}
+  classSpace={''}
   classOthers={''}
-  disabled={false}
-  text={'移除'}
-  clickFunc={() => deleteCartItem(item.id)}
-/>; */
-}
+  // disabled={false}
+  text={''}
+  clickFunc={''}
+/>;
+*/

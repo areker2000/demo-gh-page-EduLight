@@ -1,6 +1,9 @@
 const NewsCard = ({ data, index, showModalFunc }) => {
   return (
-    <article className="flex flex-col md:flex-row items-center p-5 bg-white rounded-2xl border border-gray-100 soft-shadow group hover:border-emerald-200 transition-all duration-300">
+    <article
+      className="flex flex-col md:flex-row items-center p-5 bg-white rounded-2xl border border-emerald-300 soft-shadow shadow-lg group hover:shadow-emerald-400 transition-all duration-200 hover:cursor-pointer"
+      onClick={() => showModalFunc(index)}
+    >
       <div className="w-full md:w-48 h-32 bg-blue-50 rounded-xl flex-shrink-0 relative overflow-hidden">
         <img
           src={data.imgUrl}
@@ -24,15 +27,11 @@ const NewsCard = ({ data, index, showModalFunc }) => {
           {data.content}
         </p>
       </div>
-      <div className=" w-1/8 flex justify-center">
-        <button
-          type="button"
-          className={`'font-bold mt-6 px-4 py-2 text-emerald-600 hover:text-white hover:bg-emerald-400/60 border border-emerald-500 hover:border-emerald-400/60 rounded-xl hover:cursor-pointer`}
-          onClick={() => showModalFunc(index)}
-        >
+      <div className=" w-1/8">
+        <div className="font-bold p-4 text-emerald-400 flex justify-end">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
+            className="h-10 w-10"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -44,10 +43,18 @@ const NewsCard = ({ data, index, showModalFunc }) => {
               d="M9 5l7 7-7 7"
             />
           </svg>
-        </button>
+        </div>
       </div>
     </article>
   );
 };
 
 export default NewsCard;
+
+/*
+<NewsCard 
+  data={''}
+  index={''}
+  showModalFunc={''}
+/>
+*/

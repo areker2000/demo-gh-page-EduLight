@@ -1,4 +1,5 @@
 const BorderButtonRed = ({
+  classFont = 'text-base',
   classSpace = 'p-2',
   classOthers,
   disabled = false,
@@ -14,9 +15,11 @@ const BorderButtonRed = ({
             ? 'text-red-500 hover:cursor-pointer border-red-500 hover:border-2 hover:font-bold'
             : 'text-gray-500 border-gray-500'
         } 
+        ${classFont}
         ${classSpace}
         ${classOthers} 
-        border rounded-xl`}
+        border rounded-xl
+      `}
       disabled={disabled}
       onClick={clickFunc}
     >
@@ -29,10 +32,11 @@ export default BorderButtonRed;
 
 /*
 <BorderButtonRed
-  classSpace={''}
+  // classFont={'text-base'}
+  // classSpace={'p-2'}
   classOthers={''}
-  disabled={}
+  // disabled={false}
   text={''}
-  clickFunc={}
+  clickFunc={''}
 />
 */

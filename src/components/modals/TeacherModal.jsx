@@ -13,8 +13,7 @@ const TeacherModal = ({
   selectedId,
 }) => {
   const [qty, setQty] = useState(initVal);
-  const btnClassSpace = 'px-6 py-2';
-  const btnClassShadow = 'shadow-lg shadow-amber-100';
+  const btnClassSpace = 'w-32 px-6 py-2';
 
   useEffect(() => {
     setQty(initVal);
@@ -139,23 +138,14 @@ const TeacherModal = ({
 
                 <div className="mt-6 flex items-center justify-between ">
                   <FilledButton
-                    classFont={'font-bold'}
                     classSpace={btnClassSpace}
-                    classColor={
-                      'bg-emerald-500 hover:bg-emerald-600 text-white'
-                    }
-                    classShadow={btnClassShadow}
-                    classOthers={'w-32'}
                     text={btnText[0]}
                     clickFunc={() => confirmFunc(selectedId, qty)}
                   />
 
                   <FilledButton
-                    classFont={'font-bold'}
                     classSpace={btnClassSpace}
-                    classColor={'bg-amber-500 hover:bg-amber-600 text-white'}
-                    classShadow={btnClassShadow}
-                    classOthers={'w-32'}
+                    classColorFill={'amber'}
                     text={btnText[1]}
                     clickFunc={closeModal}
                   />

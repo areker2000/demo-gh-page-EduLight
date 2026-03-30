@@ -1,6 +1,6 @@
 import { NavLink, Outlet, useNavigate } from 'react-router';
 import { useAuth } from '../context/AuthContext';
-import LoginButton from '../components/buttons/LoginButton';
+import LoginoutButton from '../components/buttons/LoginoutButton';
 import BorderButtonGreen from '../components/buttons/BorderButtonGreen';
 
 const FrontendLayout = () => {
@@ -33,7 +33,7 @@ const FrontendLayout = () => {
           <div className="space-x-8 font-medium">
             {isLogin && (
               <BorderButtonGreen
-                classSpace={'py-1 px-2 ml-4'}
+                classFont={'text-m'}
                 text={`${user} 的購課紀錄`}
                 clickFunc={() => navigate('/orders')}
               />
@@ -43,14 +43,14 @@ const FrontendLayout = () => {
             </NavLink>
 
             {isLogin ? (
-              <LoginButton
+              <LoginoutButton
                 disabled={!isLogin}
                 login={false}
                 text={'登出'}
                 clickFunc={logout}
               />
             ) : (
-              <LoginButton
+              <LoginoutButton
                 disabled={isLogin}
                 login={true}
                 text={'登入'}

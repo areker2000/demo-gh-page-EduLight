@@ -8,3 +8,10 @@ const PageTitle = ({ title, subtitle }) => {
 };
 
 export default PageTitle;
+
+/*
+<PageTitle
+  title={'最新消息'}
+  subtitle={'追蹤 EduLight 平台的最新活動與教學資訊'}
+/>
+*/

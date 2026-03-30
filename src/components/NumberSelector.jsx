@@ -82,3 +82,11 @@ const NumberSelector = ({ qty, setQty, classWidth }) => {
 };
 
 export default NumberSelector;
+
+/*
+<NumberSelector
+  qty={qty}
+  setQty={setQty}
+  classWidth={'w-auto'}
+/>
+*/

@@ -66,18 +66,18 @@ const Cart = () => {
 
   const updateCart = async (id, qty) => {
     try {
-      setIsLoading(true);
-      setIsShowModal(false);
-
       const data = {
         product_id: id,
         qty: qty,
       };
+      setFullLoadingText('正在修改購物車，請稍候');
+      setIsFullLoading(true);
 
       const res = await axios.put(`${API_BASE}/api/${API_PATH}/cart/${id}`, {
         data,
       });
       // console.log(res);
+      setIsShowModal(false);
       getCart();
     } catch (error) {
       console.error('更新購物車失敗', error);
@@ -86,7 +86,7 @@ const Cart = () => {
 
   const deleteCartItem = async (id) => {
     try {
-      setIsLoading(true);
+      setIsFullLoading(true);
       const res = await axios.delete(`${API_BASE}/api/${API_PATH}/cart/${id}`);
       // console.log(res);
       getCart();
@@ -97,7 +97,7 @@ const Cart = () => {
 
   const deleteCartAll = async () => {
     try {
-      setIsLoading(true);
+      setIsFullLoading(true);
       const res = await axios.delete(`${API_BASE}/api/${API_PATH}/carts`);
       // console.log(res);
       getCart();
@@ -215,7 +215,7 @@ const Cart = () => {
 
   const handleExternalSubmit = async () => {
     const formData = getValues();
-    console.log('驗證成功，準備送出資料：', formData);
+    // console.log('驗證成功，準備送出資料：', formData);
     try {
       setFullLoadingText('訂單處理中，請稍候');
       setIsFullLoading(true);
@@ -236,12 +236,12 @@ const Cart = () => {
           finalPrice: tmpFinalPrice - discount,
         }),
       };
-      console.log(data);
+      // console.log(data);
 
       const res = await axios.post(`${API_BASE}/api/${API_PATH}/order`, {
         data,
       });
-      console.log(res);
+      // console.log(res);
       setSelectedCoupon([]);
       setDiscount(0);
       setIsCoupon(false);
@@ -431,51 +431,54 @@ const Cart = () => {
                   <span className="opacity-60">小計</span>
                   <span>NT$ {tmpFinalPrice.toLocaleString()}</span>
                 </div>
-                <div>
-                  <span className="opacity-60">優惠碼</span>
-                  {isCoupon ? (
-                    <div className="flex justify-between">
-                      <div className="px-3 py-1 w-2/3">
-                        <span className="text-sm">{selectedCoupon?.code}</span>
-                        <br />
-                        <span className="text-xs text-emerald-500">
-                          {selectedCoupon?.title}
-                        </span>
-                      </div>
-
-                      <RemoveButton
-                        text={'刪除優惠碼'}
-                        clickFunc={deleteCoupon}
-                      />
-                    </div>
-                  ) : (
-                    <>
-                      <div className="flex justify-between  mt-1">
-                        <input
-                          type="text"
-                          className={`px-3 py-1 w-2/3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none transition 
-                              ${isLoading ? 'bg-gray-200' : 'bg-white'}`}
-                          placeholder="請輸入優惠碼"
-                          disabled={isLoading}
-                          onChange={(e) => setTmpCoupon(e.target.value)}
-                          onMouseDown={() => setIsWrongCoupon(false)}
-                        />
-                        <BorderButtonGreen
-                          classFont={'text-xs'}
-                          classSpace={'px-3'}
-                          text={'套用'}
-                          disabled={isLoading}
-                          clickFunc={couponCheck}
-                        />
-                      </div>
-                      {isWrongCoupon && (
-                        <div className="text-xs text-red-500 pl-2 mt-1">
-                          {wrongCouponText}
+                {isLogin && (
+                  <div>
+                    <span className="opacity-60">優惠碼</span>
+                    {isCoupon ? (
+                      <div className="flex justify-between">
+                        <div className="px-3 py-1 w-2/3">
+                          <span className="text-sm">
+                            {selectedCoupon?.code}
+                          </span>
+                          <br />
+                          <span className="text-xs text-emerald-500">
+                            {selectedCoupon?.title}
+                          </span>
                         </div>
-                      )}
-                    </>
-                  )}
-                </div>
+
+                        <RemoveButton
+                          text={'刪除優惠碼'}
+                          clickFunc={deleteCoupon}
+                        />
+                      </div>
+                    ) : (
+                      <>
+                        <div className="flex justify-between  mt-1">
+                          <input
+                            type="text"
+                            className={`px-3 py-1 w-2/3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none transition 
+                              ${isLoading ? 'bg-gray-200' : 'bg-white'}`}
+                            placeholder="請輸入優惠碼"
+                            disabled={isLoading}
+                            onChange={(e) => setTmpCoupon(e.target.value)}
+                            onMouseDown={() => setIsWrongCoupon(false)}
+                          />
+                          <BorderButtonGreen
+                            classSpace={'px-3'}
+                            text={'套用'}
+                            disabled={isLoading}
+                            clickFunc={couponCheck}
+                          />
+                        </div>
+                        {isWrongCoupon && (
+                          <div className="text-xs text-red-500 pl-2 mt-1">
+                            {wrongCouponText}
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+                )}
                 <div className="flex justify-between">
                   <span className="opacity-60">折扣</span>
                   <span className="text-emerald-500 font-bold">
@@ -494,14 +497,7 @@ const Cart = () => {
               {isLogin ? (
                 <>
                   <FilledButton
-                    classFont={'font-bold'}
                     classSpace={'mt-8 py-4 w-full'}
-                    classColor={
-                      enableSubmitBtn_condition
-                        ? 'bg-emerald-500 text-gray-900 hover:bg-emerald-400'
-                        : 'bg-emerald-500/30 text-gray-900/30'
-                    }
-                    classShadow={'shadow-lg shadow-emerald-500/20'}
                     text={
                       enableSubmitBtn_condition
                         ? '確認並支付'
@@ -535,7 +531,9 @@ const Cart = () => {
         confirmFunc={updateCart}
         closeModal={() => {
           setIsShowModal(false);
-          setEditId('');
+          setTimeout(() => {
+            setEditId('');
+          }, 200);
         }}
         data={selectedItem?.product}
         initVal={selectedItem?.qty || 1}

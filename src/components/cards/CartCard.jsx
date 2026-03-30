@@ -31,8 +31,6 @@ const CartCard = ({
               購買時數：{item.qty} 小時
               {!isOrdered && (
                 <BorderButtonGreen
-                  classFont={'text-xs'}
-                  classSpace={'py-1 px-2 ml-4'}
                   classColor={
                     'text-emerald-500 hover:text-emerald-600 hover:cursor-pointer border-emerald-500 hover:border-emerald-600'
                   }
@@ -66,3 +64,13 @@ const CartCard = ({
 };
 
 export default CartCard;
+
+/*
+<CartCard
+  item={''}
+  setIsShowModal={''}
+  setEditId={''}
+  deleteCartItem={''}
+  isOrdered={''}
+/>
+*/

@@ -67,7 +67,7 @@ const TeacherModal = ({
                         classWidth={'w-auto'}
                       />
                       <div className="text-emerald-600 font-bold text-xl py-2">
-                        小計：NT$ {data.price * qty}
+                        小計：NT$ {(data.price * qty).toLocaleString()}
                       </div>
                     </div>
                   </div>

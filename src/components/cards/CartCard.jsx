@@ -1,7 +1,13 @@
 import BorderButtonGreen from '../buttons/BorderButtonGreen';
 import RemoveButton from '../buttons/RemoveButton';
 
-const CartCard = ({ item, setIsShowModal, setEditId, deleteCartItem }) => {
+const CartCard = ({
+  item,
+  setIsShowModal,
+  setEditId,
+  deleteCartItem,
+  isOrdered,
+}) => {
   return (
     <div className="space-y-4" key={item.id}>
       <div className="flex items-center p-4 bg-white rounded-2xl border border-gray-100 soft-shadow group hover:border-emerald-200 transition">
@@ -15,7 +21,7 @@ const CartCard = ({ item, setIsShowModal, setEditId, deleteCartItem }) => {
         <div className="ml-6 flex-1">
           <h3 className="font-bold text-gray-800">{item.product.title}</h3>
           <p className="text-gray-400 text-sm">
-            單價：NT$ {item.product.price} / 小時
+            單價：NT$ {item.product.price.toLocaleString()} / 小時
           </p>
           <p className="text-gray-400 text-sm">
             授課教師：{item.product.imagesUrl[0]}
@@ -23,32 +29,36 @@ const CartCard = ({ item, setIsShowModal, setEditId, deleteCartItem }) => {
           <div className="py-2">
             <div className="text-sm font-medium text-gray-500 pb-1">
               購買時數：{item.qty} 小時
-              <BorderButtonGreen
-                classFont={'text-xs'}
-                classSpace={'py-1 px-2 ml-4'}
-                classColor={
-                  'text-emerald-500 hover:text-emerald-600 hover:cursor-pointer border-emerald-500 hover:border-emerald-600'
-                }
-                text={'修改時數'}
-                clickFunc={() => {
-                  setEditId(item.id);
-                  setTimeout(() => {
-                    setIsShowModal(true);
-                  }, 0);
-                }}
-              />
+              {!isOrdered && (
+                <BorderButtonGreen
+                  classFont={'text-xs'}
+                  classSpace={'py-1 px-2 ml-4'}
+                  classColor={
+                    'text-emerald-500 hover:text-emerald-600 hover:cursor-pointer border-emerald-500 hover:border-emerald-600'
+                  }
+                  text={'修改時數'}
+                  clickFunc={() => {
+                    setEditId(item.id);
+                    setTimeout(() => {
+                      setIsShowModal(true);
+                    }, 0);
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
         <div></div>
         <div className="text-right w-28">
           <span className="block font-bold text-emerald-600 text-lg">
-            NT$ {item.total}
+            NT$ {item.total.toLocaleString()}
           </span>
-          <RemoveButton
-            text={'刪除課程'}
-            clickFunc={() => deleteCartItem(item.id)}
-          />
+          {!isOrdered && (
+            <RemoveButton
+              text={'刪除課程'}
+              clickFunc={() => deleteCartItem(item.id)}
+            />
+          )}
         </div>
       </div>
     </div>

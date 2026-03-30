@@ -7,7 +7,8 @@ import LoadingBlock from '../components/LoadingBlock';
 import PageTitle from '../components/PageTitle';
 
 const Teachers = () => {
-  const { API_BASE, API_PATH } = useAuth();
+  const { API_BASE, API_PATH, setFullLoadingText, setIsFullLoading } =
+    useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [teachers, setTeachers] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState('所有類別');
@@ -22,12 +23,14 @@ const Teachers = () => {
         product_id: id,
         qty: qty,
       };
-      // console.log(data);
+      setFullLoadingText('正在加入購物車中，請稍候');
+      setIsFullLoading(true);
 
       const res = await axios.post(`${API_BASE}/api/${API_PATH}/cart`, {
         data,
       });
       alert('加入商品成功');
+      setIsFullLoading(false);
       setShowModal(false);
     } catch (error) {
       console.error('加入購物車失敗', error);

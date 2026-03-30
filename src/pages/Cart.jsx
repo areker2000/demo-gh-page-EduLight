@@ -289,6 +289,7 @@ const Cart = () => {
                       setEditId={setEditId}
                       key={item.id}
                       deleteCartItem={deleteCartItem}
+                      isOrdered={false}
                     />
                   ))}
                 </>
@@ -428,7 +429,7 @@ const Cart = () => {
               <div className="space-y-4 text-sm">
                 <div className="flex justify-between">
                   <span className="opacity-60">小計</span>
-                  <span>NT$ {tmpFinalPrice}</span>
+                  <span>NT$ {tmpFinalPrice.toLocaleString()}</span>
                 </div>
                 <div>
                   <span className="opacity-60">優惠碼</span>
@@ -437,7 +438,7 @@ const Cart = () => {
                       <div className="px-3 py-1 w-2/3">
                         <span className="text-sm">{selectedCoupon?.code}</span>
                         <br />
-                        <span className="text-xs text-red-500">
+                        <span className="text-xs text-emerald-500">
                           {selectedCoupon?.title}
                         </span>
                       </div>
@@ -476,16 +477,16 @@ const Cart = () => {
                   )}
                 </div>
                 <div className="flex justify-between">
-                  <span className="opacity-60">優惠碼折扣</span>
+                  <span className="opacity-60">折扣</span>
                   <span className="text-emerald-500 font-bold">
-                    - NT$ {discount}
+                    - NT$ {discount.toLocaleString()}
                   </span>
                 </div>
                 <hr className="border-gray-800 my-4" />
                 <div>
                   <div className="text-base pb-2">總計金額</div>
                   <div className="text-3xl font-bold text-emerald-500">
-                    NT$ {tmpFinalPrice - discount}
+                    NT$ {(tmpFinalPrice - discount).toLocaleString()}
                   </div>
                 </div>
               </div>

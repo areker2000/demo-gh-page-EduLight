@@ -21,6 +21,17 @@ import PageTitle from '../components/PageTitle';
 import GotoButton from '../components/buttons/GotoButton';
 import SuccessOverlay from '../components/SuccessOverlay';
 
+const FormLable = ({ forID, text }) => {
+  return (
+    <label
+      className="block text-sm font-medium text-gray-500 my-2"
+      htmlFor={forID}
+    >
+      {text}
+    </label>
+  );
+};
+
 const Cart = () => {
   const [cartData, setCartData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -316,9 +327,7 @@ const Cart = () => {
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-500 my-2">
-                      持卡人姓名
-                    </label>
+                    <FormLable forID={'cardName'} text={'持卡人姓名'} />
                     <FormInput
                       register={register}
                       errors={errors}
@@ -331,12 +340,17 @@ const Cart = () => {
                       disabled={isLoading}
                     />
 
-                    <label className="block text-sm font-medium text-gray-500 my-2">
-                      信用卡卡號
-                      <span className="pl-2 text-red-300">
-                        (本欄位會檢查輸入是否符合信用卡號規範)
-                      </span>
-                    </label>
+                    <FormLable
+                      forID={'cardNumber'}
+                      text={
+                        <>
+                          信用卡卡號
+                          <span className="pl-2 text-red-300">
+                            (本欄位會檢查輸入是否符合信用卡號規範)
+                          </span>
+                        </>
+                      }
+                    />
                     <div className="relative">
                       {/* Visa(4), MasterCard(51-55), JCB(3528-3589) */}
                       <FormInput
@@ -385,31 +399,7 @@ const Cart = () => {
                       </div>
                     </div>
 
-                    <label className="block text-sm font-medium text-gray-500 my-2">
-                      E-mail
-                    </label>
-                    <FormInput
-                      register={register}
-                      errors={errors}
-                      classSpace={'px-4 py-3 w-full'}
-                      type={'text'}
-                      id={'email'}
-                      name={'email'}
-                      placeholder={'請輸入E-mail'}
-                      rules={{
-                        required: 'E-mail為必須項目',
-                        pattern: {
-                          value:
-                            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                          message: 'E-mail格式錯誤',
-                        },
-                      }}
-                      disabled={isLoading}
-                    />
-
-                    <label className="block text-sm font-medium text-gray-500 my-2">
-                      手機號碼
-                    </label>
+                    <FormLable forID={'tel'} text={'手機號碼'} />
                     <FormInput
                       register={register}
                       errors={errors}
@@ -423,6 +413,25 @@ const Cart = () => {
                         pattern: {
                           value: /^09[0-9]{8}$/,
                           message: '手機號碼格式錯誤',
+                        },
+                      }}
+                      disabled={isLoading}
+                    />
+
+                    <FormLable forID={'email'} text={'E-mail (選填)'} />
+                    <FormInput
+                      register={register}
+                      errors={errors}
+                      classSpace={'px-4 py-3 w-full'}
+                      type={'text'}
+                      id={'email'}
+                      name={'email'}
+                      placeholder={'請輸入E-mail'}
+                      rules={{
+                        pattern: {
+                          value:
+                            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                          message: 'E-mail格式錯誤',
                         },
                       }}
                       disabled={isLoading}

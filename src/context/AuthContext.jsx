@@ -7,9 +7,18 @@ const AuthProvider = ({ children }) => {
   const API_PATH = import.meta.env.VITE_API_PATH;
 
   const [user, setUser] = useState('');
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(localStorage.getItem('EduLightLogin'));
   const [isFullLoading, setIsFullLoading] = useState(false);
   const [fullLoadingText, setFullLoadingText] = useState('處理中...');
+
+  useEffect(() => {
+    if (isLogin === 'true') {
+      setIsLogin(localStorage.getItem('EduLightLogin'));
+      setUser(JSON.parse(localStorage.getItem('EduLightUser'))?.username);
+    } else {
+      setIsLogin(false);
+    }
+  }, []);
 
   const showFullLoading = (text = '處理中...') => {
     setFullLoadingText(text);
@@ -19,6 +28,7 @@ const AuthProvider = ({ children }) => {
   const loginSetting = (username) => {
     setUser(username);
     setIsLogin(true);
+    localStorage.setItem('EduLightLogin', true);
     showFullLoading('登入中');
     setTimeout(() => {
       setIsFullLoading(false);
@@ -27,6 +37,7 @@ const AuthProvider = ({ children }) => {
   const logoutSettings = () => {
     setUser('');
     setIsLogin(false);
+    localStorage.setItem('EduLightLogin', false);
     showFullLoading('登出中');
     setTimeout(() => {
       setIsFullLoading(false);

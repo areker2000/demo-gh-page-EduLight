@@ -11,7 +11,7 @@ import GotoButton from '../components/buttons/GotoButton';
 const Login = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isRemember, setIsRemember] = useState(false);
-  const { user, setUser, loginSetting } = useAuth();
+  const { loginSetting } = useAuth();
   const navigate = useNavigate();
   const {
     register,
@@ -31,11 +31,7 @@ const Login = () => {
       password,
       isRemember,
     };
-    if (isRemember) {
-      localStorage.setItem('EduLightUser', JSON.stringify(userData));
-    } else {
-      localStorage.removeItem('EduLightUser');
-    }
+    localStorage.setItem('EduLightUser', JSON.stringify(userData));
     loginSetting(username);
     navigate(-1);
   };
@@ -44,9 +40,11 @@ const Login = () => {
     const savedUser = JSON.parse(localStorage.getItem('EduLightUser'));
     if (savedUser) {
       const { username, password, isRemember } = savedUser;
-      setValue('username', username);
-      setValue('password', password);
-      setIsRemember(isRemember);
+      if (isRemember) {
+        setValue('username', username);
+        setValue('password', password);
+        setIsRemember(isRemember);
+      }
     }
   }, []);
 

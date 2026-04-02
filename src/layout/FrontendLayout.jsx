@@ -27,7 +27,7 @@ const FrontendLayout = () => {
               to="/teachers"
               className="hover:text-emerald-500 transition"
             >
-              找課程
+              課程列表
             </NavLink>
           </div>
           <div className="space-x-8 font-medium">

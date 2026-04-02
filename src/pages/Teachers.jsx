@@ -81,7 +81,7 @@ const Teachers = () => {
 
   return (
     <>
-      <PageTitle title={'找課程'} />
+      <PageTitle title={'課程列表'} />
 
       <div className="flex items-center space-x-4 mb-8">
         <span className="text-gray-500">篩選條件：</span>

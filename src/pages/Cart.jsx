@@ -61,13 +61,13 @@ const Cart = () => {
     setIsLoading(true);
     try {
       const res = await axios.get(`${API_BASE}/api/${API_PATH}/cart`);
-      setCartData(res.data.data.carts);
-      setTmpFinalPrice(() =>
-        res.data.data.carts.reduce(
-          (sum, currClass) => sum + currClass.final_total,
-          0,
-        ),
+      const { carts } = res.data.data;
+      setCartData(carts);
+      const total = carts.reduce(
+        (sum, currClass) => sum + currClass.final_total,
+        0,
       );
+      setTmpFinalPrice(total);
 
       // console.log(res.data);
     } catch (error) {
@@ -144,16 +144,23 @@ const Cart = () => {
       const currCoupon = checkedCoupon[0];
       setSelectedCoupon(currCoupon);
       setIsCoupon(true);
-
-      if (currCoupon.method === 'minus') {
-        setDiscount(Number(currCoupon.value));
-      } else if (currCoupon.method === 'percentage') {
-        setDiscount(
-          Math.round((tmpFinalPrice * (100 - currCoupon.value)) / 100),
-        );
-      }
+      setIsWrongCoupon(false);
     }
   };
+
+  useEffect(() => {
+    if (isCoupon && selectedCoupon) {
+      if (selectedCoupon.method === 'minus') {
+        setDiscount(Number(selectedCoupon.value));
+      } else if (selectedCoupon.method === 'percentage') {
+        setDiscount(
+          Math.round((tmpFinalPrice * (100 - selectedCoupon.value)) / 100),
+        );
+      } else {
+        setDiscount(0);
+      }
+    }
+  }, [tmpFinalPrice, isCoupon, selectedCoupon]);
 
   const deleteCoupon = () => {
     setIsCoupon(false);
@@ -272,8 +279,12 @@ const Cart = () => {
 
   return (
     <>
-      {/* {JSON.stringify(cartData)} */}
-      <PageTitle title={'購物車'} />
+      <PageTitle title={'購物車'}>
+        <div className="m-3">
+          <GotoButton target={'/teachers'} text={'回到課程列表'} />
+        </div>
+      </PageTitle>
+
       <div>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-8 space-y-10">
@@ -452,7 +463,12 @@ const Cart = () => {
                 </div>
                 {isLogin && (
                   <div>
-                    <span className="opacity-60">優惠碼</span>
+                    <span className="opacity-60">
+                      優惠碼
+                      <span className="text-xs text-gray-400">
+                        (spring85、new300)
+                      </span>
+                    </span>
                     {isCoupon ? (
                       <div className="flex justify-between">
                         <div className="px-3 py-1 w-2/3">

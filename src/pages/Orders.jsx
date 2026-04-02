@@ -7,6 +7,7 @@ import PageTitle from '../components/PageTitle';
 import LoadingBlock from '../components/LoadingBlock';
 import CartCard from '../components/cards/CartCard';
 import SearchUnit from '../components/SearchUnit';
+import GotoButton from '../components/buttons/GotoButton';
 
 const Orders = () => {
   const { isLogin, API_BASE, API_PATH } = useAuth();
@@ -53,7 +54,11 @@ const Orders = () => {
 
   return (
     <>
-      <PageTitle title={'購課紀錄'} />
+      <PageTitle title={'購課紀錄'}>
+        <div className="m-3">
+          <GotoButton target={'/teachers'} text={'回到課程列表'} />
+        </div>
+      </PageTitle>
       <div className="flex justify-end px-2 py-4">
         <SearchUnit
           placeholder="搜尋訂單編號"

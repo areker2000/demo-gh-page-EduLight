@@ -21,6 +21,7 @@ const Orders = () => {
     if (!isLogin) {
       navigate('/');
     } else {
+      window.scrollTo(0, 0);
       const getOrder = async () => {
         try {
           setIsLoading(true);

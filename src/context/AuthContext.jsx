@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const AuthContext = createContext(null);
@@ -10,6 +11,8 @@ const AuthProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(localStorage.getItem('EduLightLogin'));
   const [isFullLoading, setIsFullLoading] = useState(false);
   const [fullLoadingText, setFullLoadingText] = useState('處理中...');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
     if (isLogin === 'true') {
@@ -19,6 +22,19 @@ const AuthProvider = ({ children }) => {
       setIsLogin(false);
     }
   }, []);
+
+  useEffect(() => {
+    if (isLogin) updateCartCount();
+  }, [isLogin]);
+
+  const updateCartCount = async () => {
+    try {
+      const res = await axios.get(`${API_BASE}/api/${API_PATH}/cart`);
+      setCartCount(res.data.data.carts.length);
+    } catch (error) {
+      console.error('更新購物車數量失敗', error);
+    }
+  };
 
   const showFullLoading = (text = '處理中...') => {
     setFullLoadingText(text);
@@ -60,6 +76,11 @@ const AuthProvider = ({ children }) => {
         fullLoadingText,
         setFullLoadingText,
         showFullLoading,
+        isMenuOpen,
+        setIsMenuOpen,
+        cartCount,
+        setCartCount,
+        updateCartCount,
       }}
     >
       {children}

@@ -1,11 +1,17 @@
 import { useNavigate } from 'react-router';
+import { useAuth } from '../../context/AuthContext';
 
 const GotoButton = ({ target, text }) => {
   const navigate = useNavigate();
+  const { setIsMenuOpen } = useAuth();
+
   return (
     <button
       type="button"
-      onClick={() => navigate(target)}
+      onClick={() => {
+        navigate(target);
+        setIsMenuOpen(false);
+      }}
       className="text-gray-400 hover:text-gray-600 text-sm flex items-center justify-center transition hover:cursor-pointer"
     >
       <svg

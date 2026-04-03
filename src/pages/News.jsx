@@ -10,6 +10,7 @@ const News = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     setData(newsData);
   }, []);
 

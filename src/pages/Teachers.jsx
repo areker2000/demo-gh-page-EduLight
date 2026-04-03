@@ -8,8 +8,13 @@ import PageTitle from '../components/PageTitle';
 import SearchUnit from '../components/SearchUnit';
 
 const Teachers = () => {
-  const { API_BASE, API_PATH, setFullLoadingText, setIsFullLoading } =
-    useAuth();
+  const {
+    API_BASE,
+    API_PATH,
+    setFullLoadingText,
+    setIsFullLoading,
+    updateCartCount,
+  } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [teachers, setTeachers] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState('所有類別');
@@ -31,6 +36,7 @@ const Teachers = () => {
         data,
       });
       setShowModal(false);
+      await updateCartCount();
       setTimeout(() => {
         setIsFullLoading(false);
       }, 300);
@@ -40,6 +46,7 @@ const Teachers = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const getTeachers = async () => {
       try {
         setIsLoading(true);

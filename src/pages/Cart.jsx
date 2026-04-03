@@ -19,7 +19,7 @@ import RemoveButton from '../components/buttons/RemoveButton';
 import { useNavigate } from 'react-router';
 import PageTitle from '../components/PageTitle';
 import GotoButton from '../components/buttons/GotoButton';
-import SuccessOverlay from '../components/SuccessOverlay';
+import CheckoutOverlay from '../components/CheckoutOverlay';
 
 const FormLable = ({ forID, text }) => {
   return (
@@ -39,6 +39,7 @@ const Cart = () => {
   const [editId, setEditId] = useState('');
   const [tmpFinalPrice, setTmpFinalPrice] = useState(0);
   const [finalPrice, setFinalPrice] = useState(0);
+  const [checkoutErrorMsg, setCheckoutErrorMsg] = useState('');
   const {
     isLogin,
     isFullLoading,
@@ -46,6 +47,7 @@ const Cart = () => {
     setFullLoadingText,
     API_BASE,
     API_PATH,
+    updateCartCount,
   } = useAuth();
   const navigate = useNavigate();
 
@@ -54,6 +56,7 @@ const Cart = () => {
   }, [cartData, editId]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getCart();
   }, []);
 
@@ -68,7 +71,7 @@ const Cart = () => {
         0,
       );
       setTmpFinalPrice(total);
-
+      await updateCartCount();
       // console.log(res.data);
     } catch (error) {
       console.error('取得購物車資訊失敗', error);
@@ -95,6 +98,7 @@ const Cart = () => {
       getCart();
     } catch (error) {
       console.error('更新購物車失敗', error);
+      setIsFullLoading(false);
     }
   };
 
@@ -106,6 +110,7 @@ const Cart = () => {
       getCart();
     } catch (error) {
       console.error('刪除單項購物車失敗', error);
+      setIsFullLoading(false);
     }
   };
 
@@ -117,6 +122,7 @@ const Cart = () => {
       getCart();
     } catch (error) {
       console.error('刪除所有購物車失敗', error);
+      setIsFullLoading(false);
     }
   };
 
@@ -128,6 +134,7 @@ const Cart = () => {
   const [discount, setDiscount] = useState(0);
   const [tmpCoupon, setTmpCoupon] = useState('');
   const [isShowSuccess, setIsShowSuccess] = useState(false);
+  const [isShowFail, setIsShowFail] = useState(false);
   const [orderId, setOrderId] = useState('');
   const couponCheck = () => {
     const checkedCoupon = couponsData.filter(
@@ -259,7 +266,7 @@ const Cart = () => {
           finalPrice: tmpFinalPrice - discount,
         }),
       };
-      // console.log(data);
+      console.log(data);
 
       const res = await axios.post(`${API_BASE}/api/${API_PATH}/order`, {
         data,
@@ -273,7 +280,10 @@ const Cart = () => {
       setIsShowSuccess(true);
       getCart();
     } catch (error) {
-      console.error('送出訂單失敗', error);
+      console.error('送出訂單失敗', error.response?.data.message);
+      setCheckoutErrorMsg(error.response?.data.message);
+      setIsShowFail(true);
+      setIsFullLoading(false);
     }
   };
 
@@ -429,7 +439,7 @@ const Cart = () => {
                       disabled={isLoading}
                     />
 
-                    <FormLable forID={'email'} text={'E-mail (選填)'} />
+                    <FormLable forID={'email'} text={'E-mail'} />
                     <FormInput
                       register={register}
                       errors={errors}
@@ -439,6 +449,7 @@ const Cart = () => {
                       name={'email'}
                       placeholder={'請輸入E-mail'}
                       rules={{
+                        required: 'E-mail為必須項目',
                         pattern: {
                           value:
                             /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
@@ -561,11 +572,20 @@ const Cart = () => {
           </div>
         </div>
       </div>
-      <SuccessOverlay
+
+      <CheckoutOverlay
         isOpen={isShowSuccess}
         onClose={() => setIsShowSuccess(false)}
         orderId={orderId}
         finalPrice={finalPrice}
+        isSuccess={true}
+      />
+
+      <CheckoutOverlay
+        isOpen={isShowFail}
+        onClose={() => setIsShowFail(false)}
+        checkoutErrorMsg={checkoutErrorMsg}
+        isSuccess={false}
       />
 
       <TeacherModal

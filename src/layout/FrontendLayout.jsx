@@ -26,6 +26,12 @@ const FrontendLayout = () => {
       <nav className="bg-emerald-50/60 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-4 md:space-x-8">
+            <button
+              className="md:hidden p-2 text-emerald-600 hover:cursor-pointer"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              ☰
+            </button>
             <NavLink
               to="/"
               className="text-2xl font-bold text-emerald-600 shrink-0"
@@ -86,13 +92,6 @@ const FrontendLayout = () => {
                 }}
               />
             )}
-
-            <button
-              className="md:hidden p-2 text-emerald-600 hover:cursor-pointer"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              ☰
-            </button>
           </div>
         </div>
 

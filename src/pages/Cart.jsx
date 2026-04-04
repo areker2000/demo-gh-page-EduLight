@@ -266,18 +266,20 @@ const Cart = () => {
           finalPrice: tmpFinalPrice - discount,
         }),
       };
-      console.log(data);
+      // console.log(data);
 
       const res = await axios.post(`${API_BASE}/api/${API_PATH}/order`, {
         data,
       });
       // console.log(res);
+      setOrderId(res.data.create_at);
+      setIsShowSuccess(true);
+
       setSelectedCoupon([]);
       setDiscount(0);
       setIsCoupon(false);
       reset();
-      setOrderId(res.data.create_at);
-      setIsShowSuccess(true);
+
       getCart();
     } catch (error) {
       console.error('送出訂單失敗', error.response?.data.message);

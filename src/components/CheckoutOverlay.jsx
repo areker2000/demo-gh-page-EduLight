@@ -35,7 +35,10 @@ const CheckoutOverlay = ({
     statusConfig[isSuccess ? 'success' : 'error'];
 
   useEffect(() => {
-    setCount(duration);
+    if (!isOpen) {
+      setCount(duration);
+      return;
+    }
     const timer = setInterval(() => {
       setCount((pre) => (pre > 0 ? pre - 1 : 0));
     }, 1000);
@@ -59,7 +62,7 @@ const CheckoutOverlay = ({
       <div
         className={`
         relative w-full max-w-lg mx-auto
-        bg-white rounded-3xl shadow-2xl shadow-${color}-500/10
+        bg-white rounded-3xl shadow-2xl ${isSuccess ? 'shadow-emerald-500/10' : 'shadow-red-500/10'} 
         p-8 md:p-12
         transform transition-all duration-500 ease-out
         scale-100 opacity-100
@@ -69,12 +72,12 @@ const CheckoutOverlay = ({
         <div
           className={`
           absolute top-0 left-0 right-0 h-40
-          bg-gradient-to-br from-${color}-500 ${isSuccess ? 'to-teal-600' : 'to-rose-400'} 
+          bg-gradient-to-br ${isSuccess ? 'from-emerald-500 to-teal-600' : 'from-red-500 to-rose-300'} 
           rounded-t-3xl flex items-center justify-center
           overflow-hidden
         `}
         >
-          {status === 'success' && (
+          {isSuccess && (
             <>
               <div className="absolute w-48 h-48 bg-white/10 rounded-full -top-10 -left-10" />
               <div className="absolute w-32 h-32 bg-white/10 rounded-full -bottom-10 -right-10" />

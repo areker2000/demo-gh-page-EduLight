@@ -1,16 +1,30 @@
-# React + Vite
+# React Project - EduLight
+This project simulates an online tutoring platform's course purchasing system, featuring course selection, purchasing, user login, and order management.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Development Process
+1. Figma Wireframing & Prototyping
+   - [Figma WireFrame](https://www.figma.com/design/3vaFJpeHWlYw9leUmn3nKr/EudLight-WireFrame?t=ruA9yumrCgfZdZmo-1)
+   - [Figma Prototype](https://www.figma.com/proto/3vaFJpeHWlYw9leUmn3nKr/EudLight-WireFrame?node-id=5-10&p=f&t=ULjZbvjdZsoQfGzS-1&scaling=scale-down&content-scaling=fixed&page-id=5%3A8&starting-point-node-id=5%3A10)
+2. AI-Assisted Conceptualization
+   Utilized AI to build foundational templates and establish the visual style.
+3. React Architecture & Logic
+   Implemented the core structure and functional logic using React.
 
-Currently, two official plugins are available:
+# GitHub Pages
+  - [EduLight Live Demo](https://areker2000.github.io/demo-gh-page-EduLight/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+<br>
+<br>
 
-## React Compiler
+# React專案 - EduLight
+這份專案模擬一個線上家教網站的購課系統，可以進行選課、購課、登入以及檢視訂單等功能
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# 建構流程
+1. 使用Figma繪製初步Wireframe與製作Prototype
+   - [Figma WireFrame](https://www.figma.com/design/3vaFJpeHWlYw9leUmn3nKr/EudLight-WireFrame?t=ruA9yumrCgfZdZmo-1)
+   - [Figma Prototype](https://www.figma.com/proto/3vaFJpeHWlYw9leUmn3nKr/EudLight-WireFrame?node-id=5-10&p=f&t=ULjZbvjdZsoQfGzS-1&scaling=scale-down&content-scaling=fixed&page-id=5%3A8&starting-point-node-id=5%3A10)
+3. AI輔助建立基本概念模板並確立風格
+4. 使用React建立架構與邏輯處理
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# GitHub Pages
+  - [EduLight網站](https://areker2000.github.io/demo-gh-page-EduLight/)

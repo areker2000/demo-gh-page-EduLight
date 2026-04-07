@@ -52,7 +52,7 @@ const FrontendLayout = () => {
               {isLogin && (
                 <BorderButtonGreen
                   classFont={'text-sm md:text-base'}
-                  classOthers={'max-w-[150px] truncate'}
+                  classOthers={'max-w-[300px] truncate'}
                   text={`${user} 的購課紀錄`}
                   clickFunc={() => navigate('/orders')}
                 />

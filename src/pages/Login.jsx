@@ -78,8 +78,14 @@ const Login = () => {
                     type={'text'}
                     id={'username'}
                     name={'username'}
-                    placeholder={'請輸入使用者名稱'}
-                    rules={{ required: '使用者名稱為必須項目' }}
+                    placeholder={'請輸入使用者名稱，最多8碼'}
+                    rules={{
+                      required: '使用者名稱為必須項目',
+                      pattern: {
+                        value: /^.{1,8}$/,
+                        message: '使用者名稱長度超過8碼',
+                      },
+                    }}
                   />
                 </div>
               </div>

@@ -24,3 +24,6 @@
 ### 3. 工程化規範
 - **ESLint & Prettier**：嚴格執行程式風格檢查
 - **Git Flow**：維持清晰的 Commit Message 與版本更迭記錄
+
+
+圖片素材來源：Gemini、[Unsplash](https://unsplash.com/)
